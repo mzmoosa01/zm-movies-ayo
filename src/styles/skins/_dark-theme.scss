@@ -1,0 +1,5 @@
+$app-dark-primary: mat.define-palette(mat.$cyan-palette, 800, 100, 900);
+$app-dark-accent: mat.define-palette(mat.$amber-palette, 800);
+$app-dark-warn: mat.define-palette(mat.$red-palette, A200);
+
+$app-dark-theme: mat.define-dark-theme($app-dark-primary, $app-dark-accent, $app-dark-warn);

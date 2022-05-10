@@ -1,0 +1,5 @@
+$app-light-primary: mat.define-palette(mat.$light-blue-palette, 800, 100, 900);
+$app-light-accent: mat.define-palette(mat.$orange-palette, 800);
+$app-light-warn: mat.define-palette(mat.$red-palette, A200);
+
+$app-light-theme: mat.define-light-theme($app-light-primary, $app-light-accent, $app-light-warn);
