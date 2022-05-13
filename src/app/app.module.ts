@@ -10,12 +10,14 @@ import { MaterialModule } from './shared/material.module';
 import { MenuComponent } from './components/menu/menu.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

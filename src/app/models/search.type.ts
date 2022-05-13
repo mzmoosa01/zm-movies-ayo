@@ -1,0 +1,1 @@
+export type searchType = 'movie' | 'series' | 'episode';

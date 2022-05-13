@@ -1,6 +1,6 @@
 <form [fxLayout]="'column'" [fxLayoutAlign]="'start'" [formGroup]="searchForm">
   <mat-form-field appearance="outline" class="search-bar ml-2">
-    <mat-label>Search for a {{ searchType | async }}</mat-label>
+    <mat-label>Search for a {{ searchType }}</mat-label>
     <input formControlName="title" matInput />
     <button mat-icon-button matSuffix>
       <mat-icon>search</mat-icon>

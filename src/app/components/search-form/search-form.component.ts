@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { SearchForm } from 'src/app/models/search-form.model';
+import { searchType } from 'src/app/models/search.type';
 
 @Component({
   selector: 'app-search-form',
@@ -11,27 +11,38 @@ import { map, Observable } from 'rxjs';
 export class SearchFormComponent {
 
   public searchForm: FormGroup;
-  public searchType: Observable<string>;
+  @Input() public searchType: searchType | null = 'movie';
 
-  public constructor(private readonly _route: ActivatedRoute) {
-    this.searchType = this._route.data.pipe(map(data => data['searchType']))
+  @Output() submit = new EventEmitter<SearchForm>();
 
+  public constructor() {
     this.searchForm = new FormGroup({
       title: new FormControl('', Validators.required),
       year: new FormControl('', [Validators.pattern(/^(19|20)[\d]{2,2}$/), Validators.max(new Date().getFullYear())])
     });
   }
 
-  public hasError(formControlName: string) {
+  public hasError(formControlName: string): boolean {
     return this.searchForm.controls[formControlName].invalid;
   }
 
-  public getYearErrorMessage() {
+  public getYearErrorMessage(): string {
     const yearControl = this.searchForm.controls['year'];
     if(yearControl.hasError('pattern')) {
       return 'Please enter a valid year.'
     }
 
     return yearControl.hasError('max') ? 'You cannot enter a year greater than the current year.':''
+  }
+
+  public submitForm(): void {
+    if(this.searchForm.valid) {
+      const data: SearchForm = {
+        title: this.searchForm.controls['title'].value,
+        type: this.searchType || 'movie',
+        year: this.searchForm.controls['year'].value
+      };
+      this.submit.emit(data);
+    }
   }
 }
