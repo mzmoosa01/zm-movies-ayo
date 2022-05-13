@@ -1,0 +1,17 @@
+<div
+  [fxLayout]="isSmallDevice ? 'column' : 'row'"
+  [fxLayoutAlign]="isSmallDevice ? 'none center' : 'center center'"
+  class="menu"
+>
+  <a
+    *ngFor="let item of menuItems"
+    mat-button
+    class="menu-item"
+    [routerLink]="[item.routerLink]"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <mat-icon class="menu-icon">{{ item.icon }}</mat-icon>
+    <span class="menu-title">{{ item.title }}</span>
+  </a>
+</div>
