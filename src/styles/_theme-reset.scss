@@ -8,8 +8,4 @@
     $warn:          map.get($color-config, 'warn'); 
     $foreground:    map.get($color-config, 'foreground');
     $background:    map.get($color-config, 'background');
-
-    mat-card {
-        margin: 0.5rem;
-    }
 }

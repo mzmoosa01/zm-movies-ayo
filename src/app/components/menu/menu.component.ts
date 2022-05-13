@@ -9,9 +9,9 @@ export class MenuComponent implements OnInit {
 
   public isSmallDevice:boolean = false;
   public menuItems = [
-    { title: 'movies', routerLink: '/movies', icon: 'movie' },
-    { title: 'tv shows', routerLink: '/tvshows', icon: 'tv' },
-    { title: 'tv episodes', routerLink: '/episodes', icon: 'video_library' },
+    { title: 'movies', routerLink: 'search', icon: 'movie' },
+    { title: 'series', routerLink: 'search/series', icon: 'tv' },
+    { title: 'episodes', routerLink: 'search/episode', icon: 'video_library' },
   ]
 
   ngOnInit() {
