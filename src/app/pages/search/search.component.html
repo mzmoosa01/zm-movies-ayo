@@ -1,1 +1,4 @@
-<app-search-form [searchType]="searchType | async"></app-search-form>
+<app-search-form
+  [searchType]="searchType | async"
+  (searchShow)="searchShow($event)"
+></app-search-form>

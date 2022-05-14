@@ -1,11 +1,13 @@
 <div class="results-container">
-  <ng-container *ngFor="let show of testData">
+  <ng-container *ngFor="let result of results">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ show.Title }}</mat-card-title>
-        <mat-card-subtitle>{{ show.Type }} - {{ show.Year }}</mat-card-subtitle>
+        <mat-card-title>{{ result.Title }}</mat-card-title>
+        <mat-card-subtitle
+          >{{ result.Type }} - {{ result.Year }}</mat-card-subtitle
+        >
       </mat-card-header>
-      <img mat-card-image src="{{ show.Poster }}" alt="{{ show.Title }}" />
+      <img mat-card-image src="{{ result.Poster }}" alt="{{ result.Title }}" />
       <mat-card-actions>
         <button mat-button>More Info</button>
       </mat-card-actions>

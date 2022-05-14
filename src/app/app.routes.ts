@@ -14,6 +14,9 @@ export const routes: Routes = [
      {path: 'search/episode', component: SearchComponent, data: {
           searchType: 'episode'
      }},
+     {
+          path: 'search/results', loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
+     },
      //TODO: 404 page
      {path: '**', pathMatch: 'full', redirectTo: 'search'},
 ];
