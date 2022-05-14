@@ -13,7 +13,7 @@ export class SearchFormComponent {
   public searchForm: FormGroup;
   @Input() public searchType: searchType | null = 'movie';
 
-  @Output() submit = new EventEmitter<SearchForm>();
+  @Output() searchShow: EventEmitter<SearchForm> = new EventEmitter<SearchForm>();
 
   public constructor() {
     this.searchForm = new FormGroup({
@@ -37,12 +37,13 @@ export class SearchFormComponent {
 
   public submitForm(): void {
     if(this.searchForm.valid) {
+      console.log('submitting');
       const data: SearchForm = {
         title: this.searchForm.controls['title'].value,
         type: this.searchType || 'movie',
         year: this.searchForm.controls['year'].value
       };
-      this.submit.emit(data);
+      this.searchShow.emit(data);
     }
   }
 }

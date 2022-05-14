@@ -11,6 +11,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './pages/search/search.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SearchComponent } from './pages/search/search.component';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     NoopAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
