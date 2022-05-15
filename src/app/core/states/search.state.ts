@@ -1,15 +1,30 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, of, Subject, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  map,
+  Observable,
+  of,
+  Subject,
+  take,
+  takeUntil,
+} from 'rxjs';
 import { SearchResponse } from 'src/app/models/search-response.model';
 import { SearchType } from 'src/app/models/search.type';
+import { ShowDetails } from 'src/app/models/show-details.model';
 import { SearchService } from '../services/search.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchState implements OnDestroy {
+  private readonly _selectedShow = new BehaviorSubject<ShowDetails | undefined>(
+    undefined
+  );
   private readonly _destroy = new Subject<void>();
+
+  public selectedShow$ = this._selectedShow.asObservable();
 
   constructor(
     private readonly _service: SearchService,
@@ -40,6 +55,35 @@ export class SearchState implements OnDestroy {
         return of(undefined);
       })
     );
+  }
+
+  /**
+   * Select a show and store it in the selectedShow observable
+   * @param imdbID
+   */
+  public selectShow(imdbID: string): void {
+    //I will use a different technique for state management here, just to show versatility.
+    this._service
+      .getShow(imdbID)
+      .pipe(
+        take(1),
+        map((resp) => {
+          const showDetails: ShowDetails = {
+            title: resp.Title,
+            rated: resp.Rated,
+            poster: resp.Poster,
+            genres: resp.Genre.trim().split(','),
+            plot: resp.Plot,
+            directors: resp.Director,
+            writers: resp.Writer,
+            actors: resp.Actors,
+            languages: resp.Language,
+          };
+          this._selectedShow.next(showDetails);
+          return showDetails;
+        })
+      )
+      .subscribe();
   }
 
   public ngOnDestroy(): void {

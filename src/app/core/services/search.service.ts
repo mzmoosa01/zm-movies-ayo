@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { GetShowResponse } from 'src/app/models/get-show-response.model';
 import { SearchResponse } from 'src/app/models/search-response.model';
 import { SearchResult } from 'src/app/models/search-result.model';
 import { SearchType } from 'src/app/models/search.type';
@@ -49,5 +50,15 @@ export class SearchService {
           };
         })
       );
+  }
+
+  /**
+   * Get a show by the imdbId
+   * @param imdbID
+   * @returns Observable<GetShowResponse>
+   */
+  public getShow(imdbID: string): Observable<GetShowResponse> {
+    const url = this.api + `&plot=full&i=${imdbID}`;
+    return this._http.get<GetShowResponse>(url);
   }
 }

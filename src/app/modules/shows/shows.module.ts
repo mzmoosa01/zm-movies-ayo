@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchResultsComponent, ShowDetailsComponent } from './components'
-import { ResultsComponent } from './pages'
+import { SearchResultsComponent, ShowDetailsComponent } from './components';
+import { ResultsComponent, DetailsComponent } from './pages';
 import { MaterialModule } from '../../shared/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { routes } from './shows.routes';
 
-
-
 @NgModule({
-  declarations: [SearchResultsComponent, ShowDetailsComponent, ResultsComponent],
+  declarations: [
+    SearchResultsComponent,
+    ShowDetailsComponent,
+    ResultsComponent,
+    DetailsComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    MaterialModule
-  ]
+    MaterialModule,
+  ],
 })
-export class ShowsModule { }
+export class ShowsModule {}

@@ -13,7 +13,13 @@
         alt="{{ result.Title }}"
       />
       <mat-card-actions>
-        <button mat-button>More Info</button>
+        <a
+          mat-button
+          color="primary"
+          [routerLink]="'./details'"
+          [queryParams]="{ id: result.imdbID }"
+          >More Info</a
+        >
       </mat-card-actions>
     </mat-card>
   </ng-container>

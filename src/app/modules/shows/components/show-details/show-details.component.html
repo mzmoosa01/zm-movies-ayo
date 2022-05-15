@@ -1,20 +1,20 @@
 <!-- Hide for desktop -->
-<img class="poster" src="{{ selectedShow.Poster }}" />
+<img class="poster" src="{{ selectedShow?.poster }}" />
 <!-- Use fx row layout for desktop -->
 <div class="details-container">
   <!-- Show for desktop -->
-  <img class="poster" src="{{ selectedShow.Poster }}" fxHide />
+  <img class="poster" src="{{ selectedShow?.poster }}" fxHide />
   <mat-card>
     <mat-card-header>
       <mat-card-title
-        >{{ selectedShow.Title }}
+        >{{ selectedShow?.title }}
         <span class="rated">
-          {{ selectedShow.Rated }}
+          {{ selectedShow?.rated }}
         </span>
       </mat-card-title>
       <mat-card-subtitle>
         <mat-chip-list
-          ><mat-chip *ngFor="let genre of genres">{{
+          ><mat-chip *ngFor="let genre of selectedShow?.genres">{{
             genre
           }}</mat-chip></mat-chip-list
         >
@@ -22,16 +22,16 @@
     </mat-card-header>
     <mat-card-content>
       <p>
-        {{ selectedShow.Plot }}
+        {{ selectedShow?.plot }}
       </p>
       <mat-divider></mat-divider>
-      <p class="mt-4">Directors: {{ selectedShow.Director }}</p>
+      <p class="mt-4">Directors: {{ selectedShow?.directors }}</p>
       <mat-divider></mat-divider>
-      <p class="mt-4">Writers: {{ selectedShow.Writer }}</p>
+      <p class="mt-4">Writers: {{ selectedShow?.writers }}</p>
       <mat-divider></mat-divider>
-      <p class="mt-4">Actors: {{ selectedShow.Actors }}</p>
+      <p class="mt-4">Actors: {{ selectedShow?.actors }}</p>
       <mat-divider></mat-divider>
-      <p class="mt-4">Languages: {{ selectedShow.Language }}</p>
+      <p class="mt-4">Languages: {{ selectedShow?.languages }}</p>
     </mat-card-content>
   </mat-card>
 </div>

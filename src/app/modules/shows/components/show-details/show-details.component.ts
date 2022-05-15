@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ShowDetails } from 'src/app/models/show-details.model';
 
 @Component({
   selector: 'app-show-details',
   templateUrl: './show-details.component.html',
-  styleUrls: ['./show-details.component.scss']
+  styleUrls: ['./show-details.component.scss'],
 })
-export class ShowDetailsComponent implements OnInit {
-
+export class ShowDetailsComponent {
   public testData = `{
     "Title": "Absolutely Anything",
     "Year": "2015",
@@ -46,17 +46,9 @@ export class ShowDetailsComponent implements OnInit {
     "Production": "N/A",
     "Website": "N/A",
     "Response": "True"
-}`
+}`;
 
-@Input() public selectedShow; 
-public genres: string[] = [];
+  @Input() public selectedShow: ShowDetails | undefined | null;
 
-  constructor() { 
-    this.selectedShow = JSON.parse(this.testData)
-  }
-
-  ngOnInit(): void {
-    this.genres = this.selectedShow.Genre.trim().split(',');
-  }
-
+  constructor() {}
 }

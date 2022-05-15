@@ -1,8 +1,7 @@
-import { Routes } from "@angular/router";
-import { ShowDetailsComponent } from "./components";
-import { ResultsComponent } from "./pages";
+import { Routes } from '@angular/router';
+import { ResultsComponent, DetailsComponent } from './pages';
 
 export const routes: Routes = [
-    {path: '', component: ResultsComponent},
-    {path: 'details', component: ShowDetailsComponent}
-]
+  { path: '', component: ResultsComponent },
+  { path: 'details', component: DetailsComponent },
+];
