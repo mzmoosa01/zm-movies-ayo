@@ -19,15 +19,6 @@ export class SearchComponent {
     private readonly _route: ActivatedRoute,
     private readonly _snackBar: MatSnackBar
   ) {
-    // this.searchType = this._route.data.pipe(
-    //   map((data) => {
-    //     if (data['error']) {
-    //       this.errorMessage = data['error'];
-    //       this._handleError(data['error']);
-    //     }
-    //     return data['searchType'] || 'movie';
-    //   })
-    // );
     this.searchType = this._route.queryParamMap.pipe(
       map((params) => {
         this._handleError(params.get('error'));

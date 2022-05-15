@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class SearchService {
-  public api = `http://www.omdbapi.com?apikey=${environment.apiKey}`;
+  private api = environment.apiUrl;
 
   constructor(private readonly _http: HttpClient) {}
 
@@ -27,7 +27,7 @@ export class SearchService {
     title: string,
     type: SearchType,
     year?: string,
-    page?: number
+    page: number = 1
   ): Observable<SearchResponse> {
     let query = '&s=' + `*${title}*` + '&type=' + type + '&page=' + page;
     query = year ? query + '&y=' + year : query;
