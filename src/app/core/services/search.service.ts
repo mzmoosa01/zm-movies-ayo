@@ -31,7 +31,6 @@ export class SearchService {
     let query = '&s=' + `*${title}*` + '&type=' + type + '&page=' + page;
     query = year ? query + '&y=' + year : query;
     const url = this.api + query;
-    console.log(url);
     return this._http
       .get<{
         Search: SearchResult[];

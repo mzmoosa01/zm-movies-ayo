@@ -8,4 +8,8 @@ import { SearchResult } from 'src/app/models/search-result.model';
 })
 export class SearchResultsComponent {
   @Input() results: SearchResult[] | null = [];
+
+  public getPoster(posterUrl: string) {
+    return posterUrl === 'N/A' ? 'assets/img/no_image_avail.png' : posterUrl;
+  }
 }

@@ -1,13 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  BehaviorSubject,
-  catchError,
-  Observable,
-  of,
-  Subject,
-  takeUntil,
-} from 'rxjs';
+import { catchError, Observable, of, Subject, takeUntil } from 'rxjs';
 import { SearchResponse } from 'src/app/models/search-response.model';
 import { SearchType } from 'src/app/models/search.type';
 import { SearchService } from '../services/search.service';
