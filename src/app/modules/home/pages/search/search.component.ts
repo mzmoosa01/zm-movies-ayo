@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { SearchForm } from 'src/app/models/search-form.model';
 import { SearchType } from 'src/app/models/search.type';
 import { ErrorSnackbarComponent } from '../../components/error-snackbar/error-snackbar.component';
@@ -11,8 +11,10 @@ import { ErrorSnackbarComponent } from '../../components/error-snackbar/error-sn
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent {
+export class SearchComponent implements OnDestroy {
   public searchType!: Observable<SearchType>;
+
+  private readonly _destroy$ = new Subject<void>();
 
   constructor(
     private readonly _router: Router,
@@ -20,6 +22,7 @@ export class SearchComponent {
     private readonly _snackBar: MatSnackBar
   ) {
     this.searchType = this._route.queryParamMap.pipe(
+      takeUntil(this._destroy$),
       map((params) => {
         this._handleError(params.get('error'));
         return (params.get('type') as SearchType) || 'movie';
@@ -36,6 +39,11 @@ export class SearchComponent {
         }
       : { title: searchForm.title, type: searchForm.type };
     this._router.navigate(['search', 'results'], { queryParams });
+  }
+
+  public ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 
   private _handleError(message: string | null) {
