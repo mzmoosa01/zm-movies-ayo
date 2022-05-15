@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { searchResult } from 'src/app/models/search-result.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { searchResult } from 'src/app/models/search-result.model';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss']
 })
-export class SearchResultsComponent {
+export class SearchResultsComponent implements OnInit {
   @Input() results: searchResult[] | null = [];
 //   public testData = [
 //     {
@@ -38,5 +38,9 @@ export class SearchResultsComponent {
 //       Poster: "https://m.media-amazon.com/images/M/MV5BMjMxNTQ1NDgyOF5BMl5BanBnXkFtZTgwMjMxNjU0NjE@._V1_SX300.jpg"
 //     }
 // ];
+
+ngOnInit(): void {
+    console.log('results', this.results)
+}
 
 }

@@ -14,15 +14,16 @@ export class ResultsComponent implements OnInit {
   public searchResults: Observable<searchResult[]>
 
   constructor(public readonly searchFacade: SearchFacade, private readonly _router: Router) { 
-    this.searchResults = searchFacade.searchResults$.pipe(map(results => {
-      if(results) {
-        return results
-      }
-      else {
-        this._router.navigateByUrl('/');
-        return [];
-      }
-    }))
+    this.searchResults = searchFacade.searchResults$
+    // .pipe(map(results => {
+    //   if(results) {
+    //     return results
+    //   }
+    //   else {
+    //     this._router.navigateByUrl('/');
+    //     return [];
+    //   }
+    // }))
   }
 
   ngOnInit(): void {

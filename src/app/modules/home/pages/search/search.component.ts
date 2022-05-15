@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { SearchFacade } from 'src/app/core/facades/search.facade';
 import { SearchForm } from 'src/app/models/search-form.model';
 import { searchType } from 'src/app/models/search.type';
@@ -19,9 +19,10 @@ export class SearchComponent {
   }
 
   public searchShow(searchForm: SearchForm) {
-    let queryParams = searchForm.year ? 
-    {title: searchForm.title, type: searchForm.type, year: searchForm.year} : {title: searchForm.title, type: searchForm.type};
-    this._router.navigate(['/search', '/results'], {queryParams})
-    // this._searchFacade.searchShows(searchForm).subscribe(() => this._router.navigateByUrl('search/results'));
+    // let queryParams = searchForm.year ? 
+    // {title: searchForm.title, type: searchForm.type, year: searchForm.year} : {title: searchForm.title, type: searchForm.type};
+    // this._router.navigate(['/search', '/results'], {queryParams})
+    this._searchFacade.searchShows(searchForm).subscribe(() => this._router.navigateByUrl('search/results'));
   }
+
 }

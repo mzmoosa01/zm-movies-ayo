@@ -7,18 +7,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
-import { MenuComponent } from './components/menu/menu.component';
-import { SearchFormComponent } from './components/search-form/search-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SearchComponent } from './pages/search/search.component';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MenuComponent,
-    SearchFormComponent,
-    SearchComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

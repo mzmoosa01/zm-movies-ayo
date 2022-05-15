@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  selector: 'app-show-details',
+  templateUrl: './show-details.component.html',
+  styleUrls: ['./show-details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class ShowDetailsComponent implements OnInit {
 
   public testData = `{
     "Title": "Absolutely Anything",
