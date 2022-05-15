@@ -1,6 +1,4 @@
-<div class="loader-container" *ngIf="loading; else content">
-  <mat-spinner></mat-spinner>
-</div>
+<app-loader *ngIf="searchFacade.loading$ | async; else content"></app-loader>
 <ng-template #content>
   <app-show-details
     [selectedShow]="searchFacade.selectedShow$ | async"

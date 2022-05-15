@@ -1,14 +1,14 @@
-<div class="loader-container" *ngIf="loading">
-  <mat-spinner></mat-spinner>
-</div>
-<app-search-results [results]="searchResults | async"></app-search-results>
-<mat-paginator
-  *ngIf="totalResults"
-  [length]="totalResults"
-  [pageSize]="itemsPerPage"
-  [pageIndex]="pageIndex"
-  [hidePageSize]="true"
-  (page)="nextPage($event)"
-  aria-label="Select page"
->
-</mat-paginator>
+<app-loader *ngIf="searchFacade.loading$ | async; else content"></app-loader>
+<ng-template #content>
+  <app-search-results [results]="searchResults$ | async"></app-search-results>
+  <mat-paginator
+    *ngIf="totalResults"
+    [length]="totalResults"
+    [pageSize]="itemsPerPage"
+    [pageIndex]="pageIndex"
+    [hidePageSize]="true"
+    (page)="nextPage($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</ng-template>

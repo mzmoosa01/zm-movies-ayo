@@ -1,15 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  BehaviorSubject,
-  catchError,
-  map,
-  Observable,
-  of,
-  Subject,
-  take,
-  takeUntil,
-} from 'rxjs';
+import { BehaviorSubject, catchError, map, of, take } from 'rxjs';
 import { SearchResponse } from 'src/app/models/search-response.model';
 import { SearchType } from 'src/app/models/search.type';
 import { ShowDetails } from 'src/app/models/show-details.model';
@@ -18,13 +9,18 @@ import { SearchService } from '../services/search.service';
 @Injectable({
   providedIn: 'root',
 })
-export class SearchState implements OnDestroy {
+export class SearchState {
+  private readonly _loading = new BehaviorSubject<boolean>(true);
+  private readonly _searchResults = new BehaviorSubject<
+    SearchResponse | undefined
+  >(undefined);
   private readonly _selectedShow = new BehaviorSubject<ShowDetails | undefined>(
     undefined
   );
-  private readonly _destroy = new Subject<void>();
 
   public selectedShow$ = this._selectedShow.asObservable();
+  public searchResults$ = this._searchResults.asObservable();
+  public loading$ = this._loading.asObservable();
 
   constructor(
     private readonly _service: SearchService,
@@ -44,17 +40,23 @@ export class SearchState implements OnDestroy {
     type: SearchType,
     year?: string,
     page = 1
-  ): Observable<SearchResponse | undefined> {
-    return this._service.searchShow(title, type, year, page).pipe(
-      //Not sure if this would work better in the component and http calls complete so it might be unnecessary
-      takeUntil(this._destroy),
-      catchError((err) => {
-        this._router.navigate(['search'], {
-          queryParams: { error: err.message },
-        });
-        return of(undefined);
-      })
-    );
+  ): void {
+    this._loading.next(true);
+    this._service
+      .searchShow(title, type, year, page)
+      .pipe(
+        take(1),
+        catchError((err) => {
+          this._router.navigate(['search'], {
+            queryParams: { error: err.message },
+          });
+          return of(undefined);
+        })
+      )
+      .subscribe((resp) => {
+        this._searchResults.next(resp);
+        this._loading.next(false);
+      });
   }
 
   /**
@@ -62,7 +64,7 @@ export class SearchState implements OnDestroy {
    * @param imdbID
    */
   public selectShow(imdbID: string): void {
-    //I will use a different technique for state management here, just to show versatility.
+    this._loading.next(true);
     this._service
       .getShow(imdbID)
       .pipe(
@@ -79,15 +81,12 @@ export class SearchState implements OnDestroy {
             actors: resp.Actors,
             languages: resp.Language,
           };
-          this._selectedShow.next(showDetails);
           return showDetails;
         })
       )
-      .subscribe();
-  }
-
-  public ngOnDestroy(): void {
-    this._destroy.next();
-    this._destroy.complete();
+      .subscribe((showDetails) => {
+        this._selectedShow.next(showDetails);
+        this._loading.next(false);
+      });
   }
 }

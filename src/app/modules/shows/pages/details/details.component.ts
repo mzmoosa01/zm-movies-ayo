@@ -9,19 +9,17 @@ import { SearchFacade } from 'src/app/core/facades/search.facade';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
-  public loading = true;
   constructor(
     public readonly searchFacade: SearchFacade,
     private readonly _route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    window.scroll(0, 0);
     this._route.queryParamMap
-      .pipe(
-        take(1),
-        tap((params) => this.searchFacade.selectShow(params.get('id') || '')),
-        finalize(() => (this.loading = false))
-      )
-      .subscribe();
+      .pipe(take(1))
+      .subscribe((params) =>
+        this.searchFacade.selectShow(params.get('id') || '')
+      );
   }
 }
