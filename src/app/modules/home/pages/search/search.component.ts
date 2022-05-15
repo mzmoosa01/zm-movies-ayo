@@ -1,5 +1,5 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { SearchForm } from 'src/app/models/search-form.model';
