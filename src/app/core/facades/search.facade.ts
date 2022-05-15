@@ -7,7 +7,5 @@ import { SearchState } from '../states/search.state';
 export class SearchFacade {
   constructor(private readonly _state: SearchState) {}
 
-  //   public searchResults$ = this._state.searchResult$;
-
   public searchShows = this._state.searchShows.bind(this._state);
 }

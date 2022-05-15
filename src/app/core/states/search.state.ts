@@ -1,8 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, takeUntil, tap } from 'rxjs';
-import { SearchForm } from 'src/app/models/search-form.model';
+import { Router } from '@angular/router';
+import {
+  BehaviorSubject,
+  catchError,
+  Observable,
+  of,
+  Subject,
+  takeUntil,
+} from 'rxjs';
 import { SearchResponse } from 'src/app/models/search-response.model';
-import { SearchResult } from 'src/app/models/search-result.model';
 import { SearchType } from 'src/app/models/search.type';
 import { SearchService } from '../services/search.service';
 
@@ -12,7 +18,10 @@ import { SearchService } from '../services/search.service';
 export class SearchState implements OnDestroy {
   private readonly _destroy = new Subject<void>();
 
-  constructor(private readonly _service: SearchService) {}
+  constructor(
+    private readonly _service: SearchService,
+    private readonly _router: Router
+  ) {}
 
   /**
    * This calls api to search shows and stores the response in the searchResults$ observable
@@ -27,12 +36,16 @@ export class SearchState implements OnDestroy {
     type: SearchType,
     year?: string,
     page = 1
-  ): Observable<SearchResponse> {
-    return (
-      this._service
-        .searchShow(title, type, year, page)
-        //Not sure if this would work better in the component and http calls complete so it might be unnecessary
-        .pipe(takeUntil(this._destroy))
+  ): Observable<SearchResponse | undefined> {
+    return this._service.searchShow(title, type, year, page).pipe(
+      //Not sure if this would work better in the component and http calls complete so it might be unnecessary
+      takeUntil(this._destroy),
+      catchError((err) => {
+        this._router.navigate(['search'], {
+          queryParams: { error: err.message },
+        });
+        return of(undefined);
+      })
     );
   }
 

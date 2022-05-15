@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { SearchComponent } from './pages/search/search.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './home.routes';
+import { ErrorSnackbarComponent } from './components/error-snackbar/error-snackbar.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { routes } from './home.routes';
     MenuComponent,
     SearchFormComponent,
     SearchComponent,
+    ErrorSnackbarComponent,
   ],
   imports: [
     CommonModule,

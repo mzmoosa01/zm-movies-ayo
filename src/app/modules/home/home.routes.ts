@@ -9,24 +9,24 @@ export const routes: Routes = [
       {
         path: 'search',
         component: SearchComponent,
-        data: {
-          searchType: 'movie',
-        },
+        // data: {
+        //   searchType: 'movie',
+        // },
       },
-      {
-        path: 'search/series',
-        component: SearchComponent,
-        data: {
-          searchType: 'series',
-        },
-      },
-      {
-        path: 'search/episode',
-        component: SearchComponent,
-        data: {
-          searchType: 'episode',
-        },
-      },
+      // {
+      //   path: 'search/series',
+      //   component: SearchComponent,
+      //   data: {
+      //     searchType: 'series',
+      //   },
+      // },
+      // {
+      //   path: 'search/episode',
+      //   component: SearchComponent,
+      //   data: {
+      //     searchType: 'episode',
+      //   },
+      // },
       {
         path: 'search/results',
         loadChildren: () =>

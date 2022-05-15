@@ -1,0 +1,8 @@
+<div class="d-flex align-items-center snackbar-wrapper pr-3">
+  <mat-icon class="error-icon">error_outline</mat-icon>
+  <span *ngIf="data.errorMessage" [innerHTML]="data.errorMessage"></span>
+  <span class="flex-grow-1"></span>
+</div>
+<button mat-icon-button class="close-button" (click)="closeSnackbar()">
+  <mat-icon>close</mat-icon>
+</button>

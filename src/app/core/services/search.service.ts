@@ -33,9 +33,17 @@ export class SearchService {
     const url = this.api + query;
     console.log(url);
     return this._http
-      .get<{ Search: SearchResult[]; totalResults: string }>(url)
+      .get<{
+        Search: SearchResult[];
+        totalResults: string;
+        Response: string;
+        Error?: string;
+      }>(url)
       .pipe(
         map((data) => {
+          if (data.Response === 'False') {
+            throw new Error(data.Error ? data.Error : 'Unknown Error!');
+          }
           return {
             results: data.Search,
             totalResults: Number(data.totalResults),

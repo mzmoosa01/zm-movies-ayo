@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { SearchFacade } from 'src/app/core/facades/search.facade';
 import { SearchForm } from 'src/app/models/search-form.model';
 import { SearchType } from 'src/app/models/search.type';
+import { ErrorSnackbarComponent } from '../../components/error-snackbar/error-snackbar.component';
 
 @Component({
   selector: 'app-search',
@@ -11,15 +12,27 @@ import { SearchType } from 'src/app/models/search.type';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
-  public searchType: Observable<SearchType>;
+  public searchType!: Observable<SearchType>;
 
   constructor(
-    private _router: Router,
+    private readonly _router: Router,
     private readonly _route: ActivatedRoute,
-    private readonly _searchFacade: SearchFacade
+    private readonly _snackBar: MatSnackBar
   ) {
-    this.searchType = this._route.data.pipe(
-      map((data) => data['searchType'] || 'movie')
+    // this.searchType = this._route.data.pipe(
+    //   map((data) => {
+    //     if (data['error']) {
+    //       this.errorMessage = data['error'];
+    //       this._handleError(data['error']);
+    //     }
+    //     return data['searchType'] || 'movie';
+    //   })
+    // );
+    this.searchType = this._route.queryParamMap.pipe(
+      map((params) => {
+        this._handleError(params.get('error'));
+        return (params.get('type') as SearchType) || 'movie';
+      })
     );
   }
 
@@ -32,6 +45,19 @@ export class SearchComponent {
         }
       : { title: searchForm.title, type: searchForm.type };
     this._router.navigate(['search', 'results'], { queryParams });
-    // this._searchFacade.searchShows(searchForm).subscribe(() => this._router.navigateByUrl('search/results'));
+  }
+
+  private _handleError(message: string | null) {
+    if (message) {
+      this._snackBar.openFromComponent(ErrorSnackbarComponent, {
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: ['error-snackbar'],
+        data: {
+          errorMessage: message,
+          onClose: () => this._snackBar.dismiss(),
+        },
+      });
+    }
   }
 }

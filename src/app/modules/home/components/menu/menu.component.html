@@ -8,8 +8,7 @@
     mat-button
     class="menu-item"
     [routerLink]="[item.routerLink]"
-    routerLinkActive="active-link"
-    [routerLinkActiveOptions]="{ exact: true }"
+    [queryParams]="item.queryParams"
   >
     <mat-icon class="menu-icon">{{ item.icon }}</mat-icon>
     <span class="menu-title">{{ item.title }}</span>
