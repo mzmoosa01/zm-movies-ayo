@@ -1,0 +1,37 @@
+<!-- Hide for desktop -->
+<img class="poster" src="{{ selectedShow.Poster }}" />
+<!-- Use fx row layout for desktop -->
+<div class="details-container">
+  <!-- Show for desktop -->
+  <img class="poster" src="{{ selectedShow.Poster }}" fxHide />
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title
+        >{{ selectedShow.Title }}
+        <span class="rated">
+          {{ selectedShow.Rated }}
+        </span>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <mat-chip-list
+          ><mat-chip *ngFor="let genre of genres">{{
+            genre
+          }}</mat-chip></mat-chip-list
+        >
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{ selectedShow.Plot }}
+      </p>
+      <mat-divider></mat-divider>
+      <p class="mt-4">Directors: {{ selectedShow.Director }}</p>
+      <mat-divider></mat-divider>
+      <p class="mt-4">Writers: {{ selectedShow.Writer }}</p>
+      <mat-divider></mat-divider>
+      <p class="mt-4">Actors: {{ selectedShow.Actors }}</p>
+      <mat-divider></mat-divider>
+      <p class="mt-4">Languages: {{ selectedShow.Language }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

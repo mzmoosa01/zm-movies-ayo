@@ -6,11 +6,13 @@ import { routes } from './search.routes';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { CommonModule } from '@angular/common';
 import { ResultsComponent } from './pages/results/results.component';
+import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
   declarations: [
     SearchResultsComponent,
-    ResultsComponent
+    ResultsComponent,
+    DetailsComponent
 ],
   imports: [
       CommonModule,

@@ -19,6 +19,9 @@ export class SearchComponent {
   }
 
   public searchShow(searchForm: SearchForm) {
-    this._searchFacade.searchShows(searchForm).subscribe(() => this._router.navigateByUrl('search/results'));
+    let queryParams = searchForm.year ? 
+    {title: searchForm.title, type: searchForm.type, year: searchForm.year} : {title: searchForm.title, type: searchForm.type};
+    this._router.navigate(['/search', '/results'], {queryParams})
+    // this._searchFacade.searchShows(searchForm).subscribe(() => this._router.navigateByUrl('search/results'));
   }
 }
