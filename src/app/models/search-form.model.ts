@@ -1,7 +1,7 @@
-import { searchType } from "./search.type";
+import { SearchType } from './search.type';
 
 export interface SearchForm {
-    title: string;
-    type: searchType;
-    year?: number;
+  title: string;
+  type: SearchType;
+  year?: number;
 }

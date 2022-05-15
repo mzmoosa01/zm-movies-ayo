@@ -1,3 +1,10 @@
-<app-search-results
-  [results]="searchFacade.searchResults$ | async"
-></app-search-results>
+<app-search-results [results]="searchResults | async"></app-search-results>
+<mat-paginator
+  [length]="totalResults"
+  [pageSize]="itemsPerPage"
+  [pageIndex]="pageIndex"
+  [hidePageSize]="true"
+  (page)="nextPage($event)"
+  aria-label="Select page"
+>
+</mat-paginator>
