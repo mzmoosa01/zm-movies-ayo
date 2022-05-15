@@ -42,7 +42,6 @@ export class SearchFormComponent {
 
   public submitForm(): void {
     if (this.searchForm.valid) {
-      console.log('submitting');
       const data: SearchForm = {
         title: this.searchForm.controls['title'].value,
         type: this.searchType || 'movie',
