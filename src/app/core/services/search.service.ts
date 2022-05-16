@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
+import { GlobalError } from 'src/app/models/error.model';
 import { GetShowResponse } from 'src/app/models/get-show-response.model';
 import { SearchResponse } from 'src/app/models/search-response.model';
 import { SearchResult } from 'src/app/models/search-result.model';
@@ -42,7 +43,7 @@ export class SearchService {
       .pipe(
         map((data) => {
           if (data.Response === 'False') {
-            throw new Error(data.Error ? data.Error : 'Unknown Error!');
+            throw new GlobalError(data.Error ? data.Error : 'Unknown Error!');
           }
           return {
             results: data.Search,
@@ -59,6 +60,10 @@ export class SearchService {
    */
   public getShow(imdbID: string): Observable<GetShowResponse> {
     const url = this.api + `&plot=full&i=${imdbID}`;
-    return this._http.get<GetShowResponse>(url);
+    return this._http.get<GetShowResponse>(url).pipe(
+      catchError((err) => {
+        throw new GlobalError('Selected show not found!');
+      })
+    );
   }
 }

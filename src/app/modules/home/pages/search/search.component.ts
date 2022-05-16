@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
+import { SearchFacade } from 'src/app/core/facades/search.facade';
 import { SearchForm } from 'src/app/models/search-form.model';
 import { SearchType } from 'src/app/models/search.type';
 import { ErrorSnackbarComponent } from '../../components/error-snackbar/error-snackbar.component';
@@ -19,15 +20,20 @@ export class SearchComponent implements OnDestroy {
   constructor(
     private readonly _router: Router,
     private readonly _route: ActivatedRoute,
+    private readonly _searchFacade: SearchFacade,
     private readonly _snackBar: MatSnackBar
   ) {
     this.searchType = this._route.queryParamMap.pipe(
       takeUntil(this._destroy$),
       map((params) => {
-        this._handleError(params.get('error'));
         return (params.get('type') as SearchType) || 'movie';
       })
     );
+    this._searchFacade.error$
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((error) => {
+        this._handleError(error);
+      });
   }
 
   public searchShow(searchForm: SearchForm) {

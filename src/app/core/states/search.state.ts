@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, of, take } from 'rxjs';
+import { GlobalError } from 'src/app/models/error.model';
 import { SearchResponse } from 'src/app/models/search-response.model';
 import { SearchType } from 'src/app/models/search.type';
 import { ShowDetails } from 'src/app/models/show-details.model';
@@ -11,6 +13,7 @@ import { SearchService } from '../services/search.service';
 })
 export class SearchState {
   private readonly _loading = new BehaviorSubject<boolean>(true);
+  private readonly _error = new BehaviorSubject<string | null>(null);
   private readonly _searchResults = new BehaviorSubject<
     SearchResponse | undefined
   >(undefined);
@@ -21,6 +24,7 @@ export class SearchState {
   public selectedShow$ = this._selectedShow.asObservable();
   public searchResults$ = this._searchResults.asObservable();
   public loading$ = this._loading.asObservable();
+  public error$ = this._error.asObservable();
 
   constructor(
     private readonly _service: SearchService,
@@ -46,12 +50,7 @@ export class SearchState {
       .searchShow(title, type, year, page)
       .pipe(
         take(1),
-        catchError((err) => {
-          this._router.navigate(['search'], {
-            queryParams: { error: err.message },
-          });
-          return of(undefined);
-        })
+        catchError((err) => this.handleError(err))
       )
       .subscribe((resp) => {
         this._searchResults.next(resp);
@@ -82,11 +81,26 @@ export class SearchState {
             languages: resp.Language,
           };
           return showDetails;
-        })
+        }),
+        catchError((err) => this.handleError(err))
       )
       .subscribe((showDetails) => {
         this._selectedShow.next(showDetails);
         this._loading.next(false);
       });
+  }
+
+  private handleError(err: any) {
+    if (err instanceof GlobalError) {
+      this._error.next(err.message);
+    } else if (err.status === 0 && err.error instanceof ProgressEvent) {
+      this._error.next(
+        'You are offline. Please check your internet connection and try again!'
+      );
+    } else {
+      this._error.next('Unknown error! Please try again later.');
+    }
+    this._router.navigate(['']);
+    return of(undefined);
   }
 }

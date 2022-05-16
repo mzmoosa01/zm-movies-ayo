@@ -10,6 +10,7 @@ export class SearchFacade {
   public searchResults$ = this._state.searchResults$;
   public selectedShow$ = this._state.selectedShow$;
   public loading$ = this._state.loading$;
+  public error$ = this._state.error$;
 
   public searchShows = this._state.searchShows.bind(this._state);
   public selectShow = this._state.selectShow.bind(this._state);
