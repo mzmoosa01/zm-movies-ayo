@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BehaviorSubject, of } from 'rxjs';
+import { of } from 'rxjs';
 import { SearchForm } from 'src/app/models/search-form.model';
-import { ErrorSnackbarComponent } from '../../components/error-snackbar/error-snackbar.component';
 
 import { SearchComponent } from './search.component';
 import SpyObj = jasmine.SpyObj;
@@ -112,7 +111,6 @@ describe('SearchComponent when type queryParam has a value', () => {
 });
 
 describe('SearchComponent when there is an error queryParam', () => {
-  let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
   let snackbarStub: SpyObj<MatSnackBar>;
 
@@ -148,7 +146,6 @@ describe('SearchComponent when there is an error queryParam', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchComponent);
-    component = fixture.componentInstance;
     snackbarStub = TestBed.inject(MatSnackBar) as SpyObj<MatSnackBar>;
     fixture.detectChanges();
   });

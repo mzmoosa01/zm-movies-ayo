@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of, Subject } from 'rxjs';
+import { of } from 'rxjs';
 import { SearchFacade } from 'src/app/core/facades/search.facade';
 
 import { DetailsComponent } from './details.component';

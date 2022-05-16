@@ -9,7 +9,6 @@ import {
   searchResponseErrorMock,
   searchResponseMock,
 } from 'src/app/mocks/search-response.mock';
-import { SearchResponse } from 'src/app/models/search-response.model';
 
 import { environment } from 'src/environments/environment';
 import { SearchService } from './search.service';
