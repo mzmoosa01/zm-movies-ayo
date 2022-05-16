@@ -1,9 +1,11 @@
-.form-container {
-    display: flex;
-    justify-content: center;
-
-}
 .search-bar {
-    width: 95%;
-    display: block
+  width: 95%;
+  display: block;
+}
+
+@media (min-width: 960px) {
+  .search-form {
+    width: 50%;
+    margin: 0 auto;
+  }
 }

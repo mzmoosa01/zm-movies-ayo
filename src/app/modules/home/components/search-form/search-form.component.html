@@ -1,4 +1,9 @@
-<form [fxLayout]="'column'" [fxLayoutAlign]="'start'" [formGroup]="searchForm">
+<form
+  [fxLayout]="'column'"
+  [fxLayoutAlign]="'start'"
+  [formGroup]="searchForm"
+  class="search-form"
+>
   <mat-form-field appearance="outline" class="search-bar ml-2">
     <mat-label>Search for a {{ searchType }}</mat-label>
     <input formControlName="title" matInput (keyup.enter)="submitForm()" />
@@ -7,7 +12,12 @@
     </button>
     <mat-error *ngIf="hasError('title')">A search query is required.</mat-error>
   </mat-form-field>
-  <mat-form-field class="ml-2" [fxFlexAlign]="'start'" appearance="outline">
+  <mat-form-field
+    class="ml-2"
+    [fxFlexAlign]="'start'"
+    [fxFlexAlign.gt-md]="'center'"
+    appearance="outline"
+  >
     <mat-label>Year of release (opional)</mat-label>
     <input formControlName="year" matInput />
     <mat-error *ngIf="hasError('year')">{{ getYearErrorMessage() }}</mat-error>
