@@ -1,4 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -28,6 +35,14 @@ export class MenuComponent implements OnInit {
     },
   ];
 
+  @Input() public isDarkMode: boolean | null = false;
+
+  @Output() public setDarkMode = new EventEmitter<void>();
+
+  public get darkModeButtonText(): string {
+    return this.isDarkMode ? 'Light Mode' : 'Dark Mode';
+  }
+
   ngOnInit() {
     window.innerWidth < 960
       ? (this.isSmallDevice = true)
@@ -39,5 +54,9 @@ export class MenuComponent implements OnInit {
     window.innerWidth < 960
       ? (this.isSmallDevice = true)
       : (this.isSmallDevice = false);
+  }
+
+  public changeDarkMode(): void {
+    this.setDarkMode.emit();
   }
 }

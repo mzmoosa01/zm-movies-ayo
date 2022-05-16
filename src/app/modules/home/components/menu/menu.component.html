@@ -13,4 +13,7 @@
     <mat-icon class="menu-icon">{{ item.icon }}</mat-icon>
     <span class="menu-title">{{ item.title }}</span>
   </a>
+  <button [fxFlex]="'noshrink'" mat-raised-button (click)="changeDarkMode()">
+    {{ darkModeButtonText }}
+  </button>
 </div>

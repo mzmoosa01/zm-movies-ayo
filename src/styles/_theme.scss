@@ -1,16 +1,13 @@
-@use '@angular/material' as mat; 
+@use "@angular/material" as mat;
 @include mat.core();
 
-@import 'theme-reset';
-.app{
-    &.app-light{
-        @import "skins/light-theme";
-        @include mat.all-component-colors($app-light-theme);
-        @include theme-reset($app-light-theme);
-    }
-    &.app-dark{
-        @import "skins/dark-theme";
-        @include mat.all-component-colors($app-dark-theme);
-        @include theme-reset($app-dark-theme);
-    }
+.app {
+  &.app-light {
+    @import "skins/light-theme";
+    @include mat.all-component-colors($app-light-theme);
+  }
+  &.app-dark {
+    @import "skins/dark-theme";
+    @include mat.all-component-colors($app-dark-theme);
+  }
 }

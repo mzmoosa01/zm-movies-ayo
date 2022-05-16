@@ -1,4 +1,11 @@
-<mat-toolbar class="horizontal-menu background-light" ngClass.gt-sm="px-0">
+<mat-toolbar
+  class="horizontal-menu"
+  id="theToolbar"
+  [ngClass]="{
+    'background-dark': settingsFacade.darkMode$ | async,
+    'background-light': settingsFacade.lightMode$ | async
+  }"
+>
   <div
     fxLayout="row"
     fxLayoutAlign="space-between center"
@@ -12,13 +19,24 @@
     <span>ZM Movies</span>
   </div>
   <div fxShow="false" fxShow.gt-sm class="container">
-    <app-menu></app-menu>
+    <app-menu
+      (setDarkMode)="changeDarkMode()"
+      [isDarkMode]="settingsFacade.darkMode$ | async"
+    ></app-menu>
   </div>
 </mat-toolbar>
-<mat-drawer-container class="background-light">
+<mat-drawer-container
+  [ngClass]="{
+    'background-dark': settingsFacade.darkMode$ | async,
+    'background-light': settingsFacade.lightMode$ | async
+  }"
+>
   <mat-drawer #drawer mode="over" class="sidenav" autoFocus="false">
     <div class="h-100">
-      <app-menu></app-menu>
+      <app-menu
+        (setDarkMode)="changeDarkMode()"
+        [isDarkMode]="settingsFacade.darkMode$ | async"
+      ></app-menu>
     </div>
   </mat-drawer>
   <mat-drawer-content>
