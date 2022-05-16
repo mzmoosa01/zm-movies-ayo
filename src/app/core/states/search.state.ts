@@ -100,7 +100,9 @@ export class SearchState {
     } else {
       this._error.next('Unknown error! Please try again later.');
     }
-    this._router.navigate(['']);
+    this._router.navigate(['']).then(() => {
+      this._error.next(null);
+    });
     return of(undefined);
   }
 }
