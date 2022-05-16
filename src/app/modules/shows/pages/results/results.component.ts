@@ -19,7 +19,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
   public page = 1;
   public totalResults = 0;
   public itemsPerPage = 10;
-  public loading = true;
 
   private readonly _destroy = new Subject<void>();
 
@@ -37,10 +36,8 @@ export class ResultsComponent implements OnInit, OnDestroy {
       map((resp) => {
         if (resp) {
           this.totalResults = resp.totalResults;
-          this.loading = false;
           return resp.results;
         }
-        this.loading = false;
         return [];
       })
     );
