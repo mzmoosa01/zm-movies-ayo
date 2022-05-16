@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { finalize, take, tap } from 'rxjs';
+import { take } from 'rxjs';
 import { SearchFacade } from 'src/app/core/facades/search.facade';
 
 @Component({
@@ -8,14 +8,11 @@ import { SearchFacade } from 'src/app/core/facades/search.facade';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent {
   constructor(
     public readonly searchFacade: SearchFacade,
     private readonly _route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    window.scroll(0, 0);
+  ) {
     this._route.queryParamMap
       .pipe(take(1))
       .subscribe((params) =>
