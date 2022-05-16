@@ -1,27 +1,42 @@
-# AyoMoviePwa
+# ZM Movies
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
+This project was created as part of the tech check assessment for Ayo holdings. It is a simple movie searching application that uses the
+[open movie database api](http://omdbapi.com/). The application is mobile and desktop responsive (mobile-first) and is a progressive web application (PWA). 
 
-## Development server
+## Packages used
+This application is built using the following packages: 
+- Angular
+- Angular material
+- Angular flexLayout
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Running the application locally
+1. Install the http package globally (ng serve does not support PWAs)
+> `npm i -g http`
+2. Install the npm packages for the application
+> `npm i`
+3. Run the start command
+> `npm run start-pwa`
 
-## Code scaffolding
+## Feature list
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Search shows(movies/series/episode)
+2. Display show details
+3. Dark mode toggle
+4. Cached responses for offline usage
 
-## Build
+## Architecture
+The architecture is divided into the following layers: 
+1. core - This is where the root injected services will live. All business logic should occur in this layer
+2. modules - Feature modules live here. These modules contain routing and presentational logic but delegate all business logic to the core layer
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The core layer is divided into the following sections: 
+1. services - This where the http calls are made and should the need arise any connection outside of the application live in this layer
+2. states - This where the state management occurs. The states depend on the service layer, map retrieved data and store the data in RXJS observables
+3. facades - This is an abstraction layer between the state and component. Should a state observable need to be used in multiple ways, the trasformation can happen here. 
 
-## Running unit tests
+Feature modules contain two types of components
+1. pages - these are the container/smart components and handle the business logic and pass data to the presentational components
+2. components - These are the presentational/dumb components that are used to build the UI 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
