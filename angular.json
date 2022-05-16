@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ayo-movie-pwa": {
+    "zm-movies-ayo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ayo-movie-pwa",
+            "outputPath": "dist/zm-movies-ayo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ayo-movie-pwa:build:production"
+              "browserTarget": "zm-movies-ayo:build:production"
             },
             "development": {
-              "browserTarget": "ayo-movie-pwa:build:development"
+              "browserTarget": "zm-movies-ayo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ayo-movie-pwa:build"
+            "browserTarget": "zm-movies-ayo:build"
           }
         },
         "test": {
@@ -112,5 +112,5 @@
       }
     }
   },
-  "defaultProject": "ayo-movie-pwa"
+  "defaultProject": "zm-movies-ayo"
 }

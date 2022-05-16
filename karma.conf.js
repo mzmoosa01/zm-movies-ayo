@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/ayo-movie-pwa'),
+      dir: require('path').join(__dirname, './coverage/zm-movies-ayo'),
       subdir: '.',
       reporters: [
         { type: 'html' },
