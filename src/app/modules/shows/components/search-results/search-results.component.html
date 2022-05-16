@@ -1,6 +1,10 @@
-<div class="results-container">
+<div
+  class="results-container"
+  [fxLayout.gt-sm]="'row wrap'"
+  [fxLayoutAlign.gt-sm]="'center center'"
+>
   <ng-container *ngFor="let result of results">
-    <mat-card>
+    <mat-card class="show-card">
       <mat-card-header>
         <mat-card-title>{{ result.Title }}</mat-card-title>
         <mat-card-subtitle
