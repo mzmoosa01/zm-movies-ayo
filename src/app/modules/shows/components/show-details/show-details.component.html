@@ -1,10 +1,14 @@
 <!-- Hide for desktop -->
-<img class="poster" src="{{ selectedShow?.poster }}" />
+<img class="poster" src="{{ selectedShow?.poster }}" fxHide.gt-md />
 <!-- Use fx row layout for desktop -->
-<div class="details-container">
+<div
+  class="details-container"
+  [fxLayout.gt-sm]="'row'"
+  [fxLayoutAlign.gt-sm]="'center start'"
+>
   <!-- Show for desktop -->
-  <img class="poster" src="{{ selectedShow?.poster }}" fxHide />
-  <mat-card>
+  <img class="poster" src="{{ selectedShow?.poster }}" fxHide.sm />
+  <mat-card class="details-card">
     <mat-card-header>
       <mat-card-title
         >{{ selectedShow?.title }}

@@ -1,28 +1,37 @@
 .details-container {
-    margin-top: 400px;
+  margin-top: 400px;
 }
 
 .poster {
-    width: 100%;
-    height: 500px;
-    max-height: 500px;
-    object-fit: cover;
-    z-index: -99;
-    position: absolute;
-    top: 10px;
+  width: 100%;
+  height: 500px;
+  max-height: 500px;
+  object-fit: cover;
+  z-index: -99;
+  position: absolute;
+  top: 10px;
 
+  @media (min-width: 960px) {
+    position: unset;
+    top: unset;
+    width: unset;
+  }
+}
+
+@media (min-width: 960px) {
+  .details-card {
+    width: 40%;
+  }
+
+  .details-container {
+    margin-top: 0px;
+  }
 }
 
 .rated {
-    font-size: 1rem;
-    line-height: 1.2;
-    padding: 0px 10px;
-    border-radius: 5px;
-    background-color: rgba(154, 151, 151, 0.876);
+  font-size: 1rem;
+  line-height: 1.2;
+  padding: 0px 10px;
+  border-radius: 5px;
+  background-color: rgba(154, 151, 151, 0.876);
 }
-// .background-container {
-//     min-width: 100vw;
-//     background-size: cover;
-//     background-position: center;
-//     background-repeat: no-repeat;
-// }
