@@ -1,6 +1,17 @@
 {
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
+  "dataGroups": [
+    {
+      "name": "search",
+      "urls": ["http://www.omdbapi.com"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "3d"
+      }
+    }
+  ],
   "assetGroups": [
     {
       "name": "app",
@@ -12,6 +23,10 @@
           "/manifest.webmanifest",
           "/*.css",
           "/*.js"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/**",
+          "https://fonts.gstatic.com/**"
         ]
       }
     },
