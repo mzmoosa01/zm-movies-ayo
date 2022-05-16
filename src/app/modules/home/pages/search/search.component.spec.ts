@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { SearchForm } from 'src/app/models/search-form.model';
+import { ErrorSnackbarComponent } from '../../components/error-snackbar/error-snackbar.component';
 
 import { SearchComponent } from './search.component';
 import SpyObj = jasmine.SpyObj;
@@ -113,6 +114,7 @@ describe('SearchComponent when type queryParam has a value', () => {
 describe('SearchComponent when there is an error queryParam', () => {
   let fixture: ComponentFixture<SearchComponent>;
   let snackbarStub: SpyObj<MatSnackBar>;
+  const message = 'Error message';
 
   beforeEach(async () => {
     const snackbarSpy = jasmine.createSpyObj('MatSnackbar', [
@@ -132,7 +134,7 @@ describe('SearchComponent when there is an error queryParam', () => {
             queryParamMap: of({
               get: (key: string) => {
                 const params: { [key: string]: string } = {
-                  error: 'Error message',
+                  error: message,
                 };
                 return params[key];
               },
@@ -150,7 +152,23 @@ describe('SearchComponent when there is an error queryParam', () => {
     fixture.detectChanges();
   });
 
-  it('should open the error snackbar', () => {
-    expect(snackbarStub.openFromComponent).toHaveBeenCalled();
+  it('should open the error snackbar with the correct params', () => {
+    expect(snackbarStub.openFromComponent.calls.mostRecent().args[0]).toBe(
+      ErrorSnackbarComponent
+    );
+    expect(snackbarStub.openFromComponent.calls.mostRecent().args[1]).toEqual(
+      jasmine.objectContaining({
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: ['error-snackbar'],
+      })
+    );
+    expect(
+      snackbarStub.openFromComponent.calls.mostRecent().args[1]?.data
+    ).toEqual(
+      jasmine.objectContaining({
+        errorMessage: message,
+      })
+    );
   });
 });
