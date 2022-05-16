@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start-pwa": "ng build --prod && http-server -p 8080 -c-1 dist/zm-movies-ayo",
+    "start-pwa": "ng build && http-server -p 8080 -c-1 dist/zm-movies-ayo",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
