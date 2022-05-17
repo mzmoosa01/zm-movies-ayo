@@ -27,12 +27,13 @@ export class MenuComponent implements OnInit {
       queryParams: { type: 'series' },
       icon: 'tv',
     },
-    {
-      title: 'episodes',
-      routerLink: 'search',
-      queryParams: { type: 'series' },
-      icon: 'video_library',
-    },
+    // I had initially inncluded episode search but it seems the api does not support it.
+    // {
+    //   title: 'episodes',
+    //   routerLink: 'search',
+    //   queryParams: { type: 'episode' },
+    //   icon: 'video_library',
+    // },
   ];
 
   @Input() public isDarkMode: boolean | null = false;

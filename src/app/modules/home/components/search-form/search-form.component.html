@@ -5,7 +5,7 @@
   class="search-form"
 >
   <mat-form-field appearance="outline" class="search-bar ml-2">
-    <mat-label>Search for a {{ searchType }}</mat-label>
+    <mat-label>Search {{ searchType }} title</mat-label>
     <input formControlName="title" matInput (keyup.enter)="submitForm()" />
     <button mat-icon-button matSuffix (click)="submitForm()">
       <mat-icon>search</mat-icon>
